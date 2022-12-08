@@ -1,0 +1,6 @@
+data/
+notes/
+plots/
+.vscode/
+.DS_Store
+matplotlibrc
