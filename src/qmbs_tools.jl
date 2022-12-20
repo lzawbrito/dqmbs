@@ -115,7 +115,8 @@ Nematic ferromagnetic state
 function nematic_ferro(s, l)
 	up = single_up(s)
 	down = single_down(s)
-	return foldl((s1, s2) -> kron(s1, (up - down) / sqrt(2)), 2:l, init=(up - down) / sqrt(2))
+	return foldl((s1, s2) -> kron(s1, (up - down) / sqrt(2)), 2:l, 
+				 init=(up - down) / sqrt(2))
 end 
 
 

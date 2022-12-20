@@ -32,15 +32,15 @@ function decohere_2level()
 
 	h = h_free + h_coup
 	gam = 1 * sqrt(0.1)
-	liouv = liovillian(h, [gam * sm])
+	liouv = liouvillian(h, [gam * sm])
 
 	t = 0:(t_end/n_steps):t_end
 	s_0 = flatten([1 0; 0 0])
 	ds = mapreduce((x) -> expv(x, liouv, s_0), hcat, t) # Matches Manzano result
 
-	plot(t, real(ds[1, :]))
-	plot!(t, real(ds[4, :]))
-	ylims!((0, 1))
+	return t, real(ds[1, :]), real(ds[4, :])
 end
 
-decohere_2level()
+t, up, down = decohere_2level()
+df = DataFrame(t=t, up=up, down=down)
+CSV.write("./data/decohere_2level_manzano.csv", df)

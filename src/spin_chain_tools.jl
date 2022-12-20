@@ -160,3 +160,15 @@ function total_ss(s, l)
 	return t1 + t2
 end
 
+
+"""
+Embedded Hamiltonian projector operator. 
+"""
+function embed_proj(i, j, s, l)
+	sx, sy, sz, sp, sm, o, id = s_spinOps(s) 
+	p = sparse(I, (2s+1)^l, (2s+1)^l) - (3/4) * op_tensp(sz, i, l)^2 * op_tensp(sz, j, l)^2 
+	p += (1/8) * op_tensp(sp, i, l)^2 * op_tensp(sm, j, l)^2
+	p += (1/8) * op_tensp(sm, i, l)^2 * op_tensp(sp, j, l)^2
+	p += - (1/4) * op_tensp(sz, i, l) * op_tensp(sz, j, l)
+	return p
+end
